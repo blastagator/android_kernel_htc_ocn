@@ -2111,7 +2111,7 @@ static int dwc3_msm_suspend(struct dwc3_msm *mdwc)
 			portsc = USB3_PORTSC + 0x10;
 		else
 			portsc = USB3_PORTSC;
-			for (i = 0; i < num_ports; i++) {
+		for (i = 0; i < num_ports; i++) {
 			reg = dwc3_msm_read_reg(mdwc->base,
 			portsc + i*0x10);
 			pr_warn("reg = %x\n", reg);

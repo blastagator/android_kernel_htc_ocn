@@ -285,25 +285,25 @@ void msm_rpm_dump_stat(bool print_embedded)
         if (rpm_stats_dev[DEV_V3].init) {
                 reg = rpm_stats_dev[DEV_V3].reg_base;
                 for (i = 0; i < rpm_stats_dev[DEV_V3].num_records; i++) {
-                        data_v3.is_sleep_mode = msm_rpmstats_read_long_register_v3(reg, i,
-                                offsetof(struct msm_rpm_stats_data_v3, is_sleep_mode));
-                        data_v3.count = msm_rpmstats_read_long_register_v3(reg, i,
-                                offsetof(struct msm_rpm_stats_data_v3, count));
-                        data_v3.sleep_timestamp = msm_rpmstats_read_quad_register_v3(reg,
-                                i, offsetof(struct msm_rpm_stats_data_v3, sleep_timestamp));
-                        data_v3.total_duration = msm_rpmstats_read_quad_register_v3(reg,
-                                i, offsetof(struct msm_rpm_stats_data_v3, total_duration));
+                    data_v3.is_sleep_mode = msm_rpmstats_read_long_register_v3(reg, i,
+                            offsetof(struct msm_rpm_stats_data_v3, is_sleep_mode));
+                    data_v3.count = msm_rpmstats_read_long_register_v3(reg, i,
+                            offsetof(struct msm_rpm_stats_data_v3, count));
+                    data_v3.sleep_timestamp = msm_rpmstats_read_quad_register_v3(reg,
+                            i, offsetof(struct msm_rpm_stats_data_v3, sleep_timestamp));
+                    data_v3.total_duration = msm_rpmstats_read_quad_register_v3(reg,
+                            i, offsetof(struct msm_rpm_stats_data_v3, total_duration));
 
-                        if (data_v3.is_sleep_mode)
-                                data_v3.total_duration += (arch_counter_get_cntvct() - data_v3.sleep_timestamp);
+                    if (data_v3.is_sleep_mode)
+                        data_v3.total_duration += (arch_counter_get_cntvct() - data_v3.sleep_timestamp);
 
-				memset(piece, 0, sizeof(piece));
-				snprintf(piece, sizeof(piece), "%s(%d,%u,%d,%llus)",
-					i > 0 ? "," : "",
-					i,
-					data_v3.count,
-					data_v3.is_sleep_mode,
-					get_time_in_sec(data_v3.total_duration));
+				    memset(piece, 0, sizeof(piece));
+				    snprintf(piece, sizeof(piece), "%s(%d,%u,%d,%llus)",
+					    i > 0 ? "," : "",
+					    i,
+					    data_v3.count,
+					    data_v3.is_sleep_mode,
+					    get_time_in_sec(data_v3.total_duration));
 					strcat(output, piece);
 
                 }
@@ -423,7 +423,7 @@ static ssize_t msm_rpmstats_file_read(struct file *file, char __user *bufu,
 			prvdata->len = msm_rpmstats_copy_stats(prvdata);
 		else if (prvdata->platform_data->version == 2)
 			prvdata->len = msm_rpmstats_copy_stats_v2(prvdata);
-			*ppos = 0;
+		*ppos = 0;
 	}
 	return simple_read_from_buffer(bufu, count, ppos,
 			prvdata->buf, prvdata->len);
